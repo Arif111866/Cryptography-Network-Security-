@@ -1,0 +1,132 @@
+/* "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ  " -In the name of Allah."
+-------------------- A R I F ----------------------- */
+
+#include<bits/stdc++.h>
+// for order set ---------------------
+//#include<ext/pb_ds/assoc_container.hpp>
+//#include<ext/pb_ds/tree_policy.hpp>
+//using namespace __gnu_pbds;
+//#define        ordered_set   tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update>
+//#define        index_of(x) find_by_order(x) // index_of the value x
+//#define        number_of(x) order_of_key(x) // how many value are stricly less then x
+// ------------------------------------
+#define        int long long int 
+#define        INF 1e18
+#define        PI 3.141592653
+#define        PB push_back 
+#define        F first
+#define        S second
+#define        MP(x, y) push_back(make_pair(x, y))
+#define        srt(v) sort(v.begin(), v.end())
+#define        all(x) x.begin(), x.end()
+#define        rsrt(v) reverse(v.begin(), v.end())
+#define        no cout << "NO" << endl
+#define        yes cout << "YES" << "\n"
+#define        e "\n" 
+#define        pair  vector< pair <int ,int> >
+#define        deb(args...){string _s = #args;replace(_s.begin(), _s.end(), ',', ' ');stringstream _ss(_s);istream_iterator<string> _it(_ss);err(_it, args);}
+
+using namespace std;
+
+template <typename T>
+ostream &operator<<(ostream &os, const vector<T> &v){ os << '{'; for (const auto &x : v) os << " " << x; return os << '}';}
+void err(istream_iterator<string> it) {} template <typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args){ cerr << *it <<"  = " << a << endl; err(++it, args...);}
+/*----------------------------------------------------------------------------------------*/
+int expo(int a, int b, int mod) {int res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
+int mod_add(int a, int b, int m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
+int mod_mul(int a, int b, int m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
+int mod_sub(int a, int b, int m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
+int mminvprime(int a, int b) {return expo(a, b - 2, b);}
+int mod_div(int a, int b, int m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+int getRandomNumber(int l, int r) {return uniform_int_distribution<int>(l, r)(rng);}
+bool isBitSet(int num, int bitPosition) { return (num & (1 << bitPosition)) > 0 ; }
+/*----------------------------------------------------------------------------------------*/
+map<string , string > mp ;
+string encyption(string &s){
+    string tem  = "" ;
+    string result = "" ;
+    for(auto it : s){
+        tem += it ;
+        if(tem.size() == 3){
+            result += mp[tem] ;
+            tem = "" ;
+        }
+    }
+    if(tem.size())
+        result += mp[tem] ;
+    return result ; 
+}
+void   solve()
+{
+    int n = 0 , m = 0 , k = 0 , ans = 0 , cnt  = 0 ;
+
+    std::vector<string> v3, v2, v1;
+    string tem  = "" ;
+    string alpha = "abcdefghijklmnopqrstuvwxyz " ;
+    for(auto i : alpha){
+        for(auto j : alpha){
+            for(auto k : alpha){
+                tem += i; tem += j ; tem += k ;
+                v3.push_back(tem) ;
+                tem = "" ;
+            }
+            tem += i ; tem += j ;
+            v2.push_back(tem) ;
+            tem = "" ;
+        }
+        tem += i ;
+        v1.push_back(tem) ;
+        tem = "" ;
+    }
+    for(int i =0; i<v1.size() ; i++){
+        if(mp[v1[i]] == ""){
+            mp[v1[i]] = v1[(i+10)%v1.size()] ;
+            mp[v1[(i+10)%v1.size()]] = v1[i] ;
+        }
+    }
+    for(int i =0; i<v2.size() ; i++){
+        if(mp[v2[i]] == ""){
+            mp[v2[i]] = v2[(i+50)%v2.size()] ;
+            mp[v2[(i+50)%v2.size()]] = v2[i] ;
+        }
+    }
+    for(int i =0; i<v3.size() ; i++){
+        if(mp[v3[i]] == ""){
+            mp[v3[i]] = v3[(i+110)%v3.size()] ;
+            mp[v3[(i+110)%v3.size()]] = v3[i] ;
+        }
+
+    }
+    string s ;
+    getline(cin , s) ;
+    cout << "the original text : " << s << e <<e ;
+
+    string result = encyption(s) ;
+    cout << "the encyption : " << result << e  << e ;
+
+    string decrypt = encyption(result) ;
+
+    cout << "the decrypt result : " << decrypt << e  << e ;
+
+}
+int32_t main()
+{ 
+
+    ios_base::sync_with_stdio(false);cin.tie(NULL);
+    int test_case =1; 
+    // cin >> test_case ; 
+    int c = 0 ;
+    // freopen("bubble.in", "r", stdin) ;
+    // freopen("bubble.out" , "w" , stdout);
+    while( test_case --)
+    {
+      // c ++ ; cout << "Case " << c << ": " ;
+       solve() ;   
+    }
+}
+//vector<int>::iterator lower, upper;
+//lower = lower_bound(v.begin(), v.end(), value) - v.begin() ;
+//upper = upper_bound(v.begin(), v.end(), value) - v.begin() ; -->
+// scanf("%s%d",s,&x) != EOF
